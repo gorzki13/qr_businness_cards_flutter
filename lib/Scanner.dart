@@ -71,13 +71,12 @@ class _ScannerState extends State<Scanner> {
     controller.scannedDataStream.listen((scanData) async {
       controller.pauseCamera();
 
-      final code = scanData.code ?? ''; // Use null-aware operator
+      final code = scanData.code ?? '';
 
-      // Split the code into parts based on the separator "-"
       List<String> parts = code.split('-');
 
       if (parts.length == 4) {
-        // If there are exactly 4 parts, create a QrData object
+
         QrData qrData = QrData(
           name: parts[0].trim(),
           surname: parts[1].trim(),
@@ -85,10 +84,9 @@ class _ScannerState extends State<Scanner> {
           email: parts[3].trim(),
         );
 
-        // Pass the QrData object back to the main screen
+
         Navigator.pop(context, qrData);
       } else {
-        // Handle invalid QR code format
         showDialog(
           context: context,
           builder: (BuildContext context) {
